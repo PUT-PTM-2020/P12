@@ -1,0 +1,19 @@
+Konfiguracja modułu WiFi ESP8266
+
+AT -> test konfiguracji
+AT+CIOBAUD=115200 -> ustawienie przędkośći komunikacji USART z mikrokontrolerem STM32 ( wartość w bodach )
+AT+CWMODE=2 -> ustawienie trybu pracy na access point
+AT+CIPMODE=0 -> ustawienie trybu odbierania danych i przesyłania do USART 
+			0 – dane odbiorcze przychodzą w formacie:
+ 			+IPD, <kanal>, <liczba_bajtow>
+
+AT+CIPMUX=1 -> ustawienie trybu pracy w tryb obsługi wielu klientów. ( nie udało się zestawić komunikacji przy ustawieniu obsługi jednego klienta )
+AT+CIPSERVER=1,50100 -> włączenie usługi serwera na porcie 50100
+AT+CWSAP="STM32","STM32zaq1",4,3 -> utworzenie sieci punktu dostępowego o parametrach:
+					nazwa: STM32
+					hasło: STM32zaq1
+					kanał: 4
+					kodowanie: dla nr. 3 WPA2_PSK
+
+Obsługa DHCP uruchomiona jest domyślnie
+adres modułu 192.168.4.1/24
