@@ -50,7 +50,7 @@ void connection() {
 
 }
 
-void create_motor_letter(int pos_x, int pos_y){
+void create_motor_letter(float pos_x, float pos_y){
     int dir_left, dir_right;
     int Duty_left, Duty_right;
 
@@ -98,11 +98,66 @@ void create_motor_letter(int pos_x, int pos_y){
         pos_x *= -1;
         Duty_left = pos_x; 
         Duty_right = pos_x;
-    } if(pos_x > 0 && pos_y < 0){
+
+    } else if(pos_x > 0 && pos_y < 0){ //pierwsza ćwiartka
+
+        pos_y *= -1;
+        //if(pos_x <= pos_y){
+            dir_left = 1;
+            dir_right = 1;
+            Duty_left = pos_y;
+            Duty_right = pos_y - (pos_x / 100 * pos_y) * 0.8;
+        
+
+        cout<<pos_x<<": "<<pos_y<<"- DR: "<<Duty_right<<" - DL"<< Duty_left <<endl;
+
+
+
+    } else if(pos_x < 0 && pos_y < 0){ // druga ćwiartka
+        
+        pos_y *= -1;
+        pos_x *= -1;
+       // if(pos_x <= pos_y){
+            dir_left = 1;
+            dir_right = 1;
+            Duty_left = pos_y - (pos_x / 100 * pos_y) * 0.8;
+            Duty_right = pos_y;
         
         
-        //pos_y *= -1;
-       // Duty_left = 100 - pos_y; 
+
+    } else if(pos_x < 0 && pos_y > 0){ //trzecia ćwiartka
+        pos_x *= -1;
+        if(pos_x <= pos_y){
+            dir_left = 0;
+            dir_right = 0;
+            Duty_left = pos_y - pos_x * 0.80;
+            Duty_right = pos_y;
+
+        } else if(pos_x > pos_y){
+            cout<<"warun!"<<endl;
+            dir_left = 1;
+            dir_right = 0;
+            Duty_left = pos_x - pos_y * 0.80;
+            Duty_right = pos_x;
+        }
+
+        cout<<pos_x<<"- DR: "<<Duty_right<<" - DL"<< Duty_left <<endl;
+
+    } else if(pos_x > 0 && pos_y > 0){ // czwarta ćwiartka
+
+        if(pos_x <= pos_y){
+            dir_left = 0;
+            dir_right = 0;
+            Duty_left = pos_y;
+            Duty_right = pos_y - pos_x * 0.80;
+
+        } else if(pos_x > pos_y){
+            cout<<"warun!"<<endl;
+            dir_left = 0;
+            dir_right = 1;
+            Duty_left = pos_x;
+            Duty_right = pos_x - pos_y * 0.80;
+        }
     }
 
     char char_dir_left = dir_left + 48;
@@ -293,7 +348,7 @@ void camera_view(int cam_i, sf::Sprite &cam, sf::Texture &cam_tex){
 int main(){
   
 
-    //connection(); //connection to STM 
+    connection(); //connection to STM 
 
     int led_state = 4; // status oświetlenia pojazdu;
     
