@@ -1,0 +1,6 @@
+camera.c:23:5:camera_init	8	static
+camera.c:28:5:camera_rd	16	static
+camera.c:33:5:camera_config	24	static
+camera.c:50:5:camera_startCap	24	static
+camera.c:67:5:camera_stopCap	8	static
+camera.c:72:6:camera_registerCallback	16	static
